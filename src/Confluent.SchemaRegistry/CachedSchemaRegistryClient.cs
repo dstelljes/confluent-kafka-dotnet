@@ -474,6 +474,41 @@ namespace Confluent.SchemaRegistry
             => await restService.TestLatestCompatibilityAsync(subject, new Schema(avroSchema, EmptyReferencesList, SchemaType.Avro)).ConfigureAwait(continueOnCapturedContext: false);
 
 
+        /// <summary>
+        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.GetCompatibilityAsync(string)" />
+        /// </summary>
+        public async Task<Compatibility> GetCompatibilityAsync(string subject)
+            => await restService.GetCompatibilityAsync(subject).ConfigureAwait(continueOnCapturedContext: false);
+
+
+        /// <summary>
+        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.SetCompatibilityAsync(string, Compatibility)" />
+        /// </summary>
+        public async Task<Compatibility> SetCompatibilityAsync(string subject, Compatibility compatibility)
+            => (await restService.SetCompatibilityAsync(subject, compatibility).ConfigureAwait(continueOnCapturedContext: false)).CompatibilityLevel;
+
+
+        /// <summary>
+        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.GetGlobalCompatibilityAsync()" />
+        /// </summary>
+        public async Task<Compatibility> GetGlobalCompatibilityAsync()
+            => await restService.GetGlobalCompatibilityAsync().ConfigureAwait(continueOnCapturedContext: false);
+
+
+        /// <summary>
+        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.SetGlobalCompatibilityAsync(Compatibility)" />
+        /// </summary>
+        public async Task<Compatibility> SetGlobalCompatibilityAsync(Compatibility compatibility)
+            => (await restService.SetGlobalCompatibilityAsync(compatibility).ConfigureAwait(continueOnCapturedContext: false)).CompatibilityLevel;
+
+
+        /// <summary>
+        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.ConstructKeySubjectName(string)" />
+        /// </summary>
+        public string ConstructKeySubjectName(string topic)
+            => $"{topic}-key";
+
+
         /// <inheritdoc />
         [Obsolete("SubjectNameStrategy should now be specified via serializer configuration. This method will be removed in a future release.")]
         public string ConstructKeySubjectName(string topic, string recordType = null)

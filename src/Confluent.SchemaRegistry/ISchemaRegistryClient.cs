@@ -227,7 +227,7 @@ namespace Confluent.SchemaRegistry
 
         /// <summary>
         ///     Check if a schema is compatible with latest version registered against a 
-        ///     specified subject.
+        ///     specified <paramref name="subject" />.
         /// </summary>
         /// <param name="subject">
         ///     The subject to check.
@@ -240,6 +240,57 @@ namespace Confluent.SchemaRegistry
         ///     registered against a specified subject, false otherwise.
         /// </returns>
         Task<bool> IsCompatibleAsync(string subject, Schema schema);
+
+
+        /// <summary>
+        ///     Get the compatibility level of a specified <paramref name="subject" />.
+        /// </summary>
+        /// <param name="subject">
+        ///     The subject to get the compatibility level for.
+        /// </param>
+        /// <returns>
+        ///     The compatibility level of <paramref name="subject" />.
+        /// </returns>
+        /// <exception cref="SchemaRegistryException">
+        ///     Thrown if no compatibility level has been set for <paramref name="subject" />.
+        /// </exception>
+        Task<Compatibility> GetCompatibilityAsync(string subject);
+
+
+        /// <summary>
+        ///     Update the compatibility level of a specified <paramref name="subject" />.
+        /// </summary>
+        /// <param name="subject">
+        ///     The subject to update.
+        /// </param>
+        /// <param name="compatibility">
+        ///     The new compatibility level.
+        /// </param>
+        /// <returns>
+        ///     The updated compatibility level.
+        /// </returns>
+        Task<Compatibility> SetCompatibilityAsync(string subject, Compatibility compatibility);
+
+
+        /// <summary>
+        ///     Get the global compatibility level.
+        /// </summary>
+        /// <returns>
+        ///     The global compatibility level.
+        /// </returns>
+        Task<Compatibility> GetGlobalCompatibilityAsync();
+
+
+        /// <summary>
+        ///     Update the global compatibility level.
+        /// </summary>
+        /// <param name="compatibility">
+        ///     The new compatibility level.
+        /// </param>
+        /// <returns>
+        ///     The updated compatibility level.
+        /// </returns>
+        Task<Compatibility> SetGlobalCompatibilityAsync(Compatibility compatibility);
 
 
         /// <summary>
