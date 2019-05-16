@@ -227,7 +227,7 @@ namespace Confluent.SchemaRegistry
 
         /// <summary>
         ///     Check if a schema is compatible with latest version registered against a 
-        ///     specified <paramref name="subject" />.
+        ///     specified subject.
         /// </summary>
         /// <param name="subject">
         ///     The subject to check.
@@ -240,6 +240,26 @@ namespace Confluent.SchemaRegistry
         ///     registered against a specified subject, false otherwise.
         /// </returns>
         Task<bool> IsCompatibleAsync(string subject, Schema schema);
+
+
+        /// <summary>
+        ///     Check if a schema is compatible with a particular version of a specified
+        ///     subject.
+        /// </summary>
+        /// <param name="subject">
+        ///     The subject to check.
+        /// </param>
+        /// <param name="versionId">
+        ///     The version of the subject to check.
+        /// </param>
+        /// <param name="schema">
+        ///     The schema to check.
+        /// </param>
+        /// <returns>
+        ///     true if <paramref name="schema" /> is compatible with the specified 
+        ///     <paramref name="versionId" /> of <paramref name="subject" />, false otherwise.
+        /// </returns>
+        Task<bool> IsCompatibleAsync(string subject, int versionId, Schema schema);
 
 
         /// <summary>

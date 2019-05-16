@@ -475,6 +475,13 @@ namespace Confluent.SchemaRegistry
 
 
         /// <summary>
+        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.IsCompatibleAsync(string, int, Schema)" />
+        /// </summary>
+        public async Task<bool> IsCompatibleAsync(string subject, int versionId, Schema schema)
+            => await restService.TestCompatibilityAsync(subject, versionId, schema).ConfigureAwait(continueOnCapturedContext: false);
+
+
+        /// <summary>
         ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.GetCompatibilityAsync(string)" />
         /// </summary>
         public async Task<Compatibility> GetCompatibilityAsync(string subject)
