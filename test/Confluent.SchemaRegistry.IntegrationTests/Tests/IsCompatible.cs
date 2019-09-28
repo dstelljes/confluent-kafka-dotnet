@@ -27,15 +27,17 @@ namespace Confluent.SchemaRegistry.IntegrationTests
         {
             var sr = new CachedSchemaRegistryClient(new SchemaRegistryConfig { Url = config.Server });
 
-            var testSchema1 = 
+            var testSchema1 = new Schema(
                 "{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"Confluent.Kafka.Examples.AvroSpecific" +
                 "\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favorite_number\",\"type\":[\"i" +
-                "nt\",\"null\"]},{\"name\":\"favorite_color\",\"type\":[\"string\",\"null\"]}]}";
+                "nt\",\"null\"]},{\"name\":\"favorite_color\",\"type\":[\"string\",\"null\"]}]}",
+                SchemaType.Avro);
 
-            var testSchema2 = // incompatible with testSchema1
+            var testSchema2 = new Schema( // incompatible with testSchema1
                 "{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"Confluent.Kafka.Examples.AvroSpecific" +
                 "\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favorite_number\",\"type\":[\"i" +
-                "nt\",\"null\"]},{\"name\":\"favorite_shape\",\"type\":[\"string\",\"null\"]}]}";
+                "nt\",\"null\"]},{\"name\":\"favorite_shape\",\"type\":[\"string\",\"null\"]}]}",
+                SchemaType.Avro);
 
 
             // case 1: record specified.

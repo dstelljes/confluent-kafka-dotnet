@@ -25,13 +25,13 @@ namespace Confluent.SchemaRegistry.IntegrationTests
     public static partial class Tests
     {
         [Theory, MemberData(nameof(SchemaRegistryParameters))]
-        public static async Task SetGlobalCompatibilityLevel(Config config)
+        public static async Task UpdateGlobalCompatibilityLevel(Config config)
         {   
-            var sr = new CachedSchemaRegistryClient(new SchemaRegistryConfig { SchemaRegistryUrl = config.Server });
+            var sr = new CachedSchemaRegistryClient(new SchemaRegistryConfig { Url = config.Server });
 
             var compatibility = Compatibility.Full;
+            await sr.UpdateGlobalCompatibilityAsync(compatibility);
 
-            Assert.Equal(compatibility, await sr.SetGlobalCompatibilityAsync(compatibility));
             Assert.Equal(compatibility, await sr.GetGlobalCompatibilityAsync());
         }
     }

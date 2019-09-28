@@ -286,10 +286,7 @@ namespace Confluent.SchemaRegistry
         /// <param name="compatibility">
         ///     The new compatibility level.
         /// </param>
-        /// <returns>
-        ///     The updated compatibility level.
-        /// </returns>
-        Task<Compatibility> SetCompatibilityAsync(string subject, Compatibility compatibility);
+        Task UpdateCompatibilityAsync(string subject, Compatibility compatibility);
 
 
         /// <summary>
@@ -307,10 +304,7 @@ namespace Confluent.SchemaRegistry
         /// <param name="compatibility">
         ///     The new compatibility level.
         /// </param>
-        /// <returns>
-        ///     The updated compatibility level.
-        /// </returns>
-        Task<Compatibility> SetGlobalCompatibilityAsync(Compatibility compatibility);
+        Task UpdateGlobalCompatibilityAsync(Compatibility compatibility);
 
 
         /// <summary>

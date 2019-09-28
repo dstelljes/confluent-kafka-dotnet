@@ -25,9 +25,9 @@ namespace Confluent.SchemaRegistry.IntegrationTests
     public static partial class Tests
     {
         [Theory, MemberData(nameof(SchemaRegistryParameters))]
-        public static async Task SetCompatibilityLevel(Config config)
+        public static async Task UpdateCompatibilityLevel(Config config)
         {   
-            var sr = new CachedSchemaRegistryClient(new SchemaRegistryConfig { SchemaRegistryUrl = config.Server });
+            var sr = new CachedSchemaRegistryClient(new SchemaRegistryConfig { Url = config.Server });
 
             var topic = Guid.NewGuid().ToString();
             var subject = sr.ConstructValueSubjectName(topic);
@@ -35,8 +35,8 @@ namespace Confluent.SchemaRegistry.IntegrationTests
             await Assert.ThrowsAsync<SchemaRegistryException>(() => sr.GetCompatibilityAsync(subject));
 
             var compatibility = Compatibility.Full;
+            await sr.UpdateCompatibilityAsync(subject, compatibility);
 
-            Assert.Equal(compatibility, await sr.SetCompatibilityAsync(subject, compatibility));
             Assert.Equal(compatibility, await sr.GetCompatibilityAsync(subject));
         }
     }

@@ -474,46 +474,29 @@ namespace Confluent.SchemaRegistry
             => await restService.TestLatestCompatibilityAsync(subject, new Schema(avroSchema, EmptyReferencesList, SchemaType.Avro)).ConfigureAwait(continueOnCapturedContext: false);
 
 
-        /// <summary>
-        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.IsCompatibleAsync(string, int, Schema)" />
-        /// </summary>
+        /// <inheritdoc/>
         public async Task<bool> IsCompatibleAsync(string subject, int versionId, Schema schema)
             => await restService.TestCompatibilityAsync(subject, versionId, schema).ConfigureAwait(continueOnCapturedContext: false);
 
 
-        /// <summary>
-        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.GetCompatibilityAsync(string)" />
-        /// </summary>
+        /// <inheritdoc/>
         public async Task<Compatibility> GetCompatibilityAsync(string subject)
             => await restService.GetCompatibilityAsync(subject).ConfigureAwait(continueOnCapturedContext: false);
 
 
-        /// <summary>
-        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.SetCompatibilityAsync(string, Compatibility)" />
-        /// </summary>
-        public async Task<Compatibility> SetCompatibilityAsync(string subject, Compatibility compatibility)
-            => (await restService.SetCompatibilityAsync(subject, compatibility).ConfigureAwait(continueOnCapturedContext: false)).CompatibilityLevel;
+        /// <inheritdoc/>
+        public async Task UpdateCompatibilityAsync(string subject, Compatibility compatibility)
+            => await restService.SetCompatibilityAsync(subject, compatibility).ConfigureAwait(continueOnCapturedContext: false);
 
 
-        /// <summary>
-        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.GetGlobalCompatibilityAsync()" />
-        /// </summary>
+        /// <inheritdoc/>
         public async Task<Compatibility> GetGlobalCompatibilityAsync()
             => await restService.GetGlobalCompatibilityAsync().ConfigureAwait(continueOnCapturedContext: false);
 
 
-        /// <summary>
-        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.SetGlobalCompatibilityAsync(Compatibility)" />
-        /// </summary>
-        public async Task<Compatibility> SetGlobalCompatibilityAsync(Compatibility compatibility)
-            => (await restService.SetGlobalCompatibilityAsync(compatibility).ConfigureAwait(continueOnCapturedContext: false)).CompatibilityLevel;
-
-
-        /// <summary>
-        ///     Refer to <see cref="Confluent.SchemaRegistry.ISchemaRegistryClient.ConstructKeySubjectName(string)" />
-        /// </summary>
-        public string ConstructKeySubjectName(string topic)
-            => $"{topic}-key";
+        /// <inheritdoc/>
+        public async Task UpdateGlobalCompatibilityAsync(Compatibility compatibility)
+            => await restService.SetGlobalCompatibilityAsync(compatibility).ConfigureAwait(continueOnCapturedContext: false);
 
 
         /// <inheritdoc />
